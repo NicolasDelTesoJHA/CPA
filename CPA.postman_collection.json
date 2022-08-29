@@ -1,0 +1,240 @@
+{
+	"info": {
+		"_postman_id": "8a65846b-6295-46f2-9f46-91f0fba84058",
+		"name": "CPA",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19136037"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "GET USER W/ ID",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "GET USERS",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json()\r",
+									"\r",
+									"pm.test (\"status code 200\", function(){\r",
+									"\r",
+									"    pm.response.to.have.status(200)\r",
+									"    console.log(\"200 response\")\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://gorest.co.in/public/v2/users/",
+							"protocol": "https",
+							"host": [
+								"gorest",
+								"co",
+								"in"
+							],
+							"path": [
+								"public",
+								"v2",
+								"users",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE USER",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var requestJson = postman.getEnvironmentVariable(\"ID_USER\")\r",
+									"\r",
+									"pm.test(\"Status code 204\", function(){\r",
+									"\r",
+									"pm.response.to.have.status(204)\r",
+									"console.log(\"Id\"+responseJson + \"deleted.\")\r",
+									"\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/users/{{ID_USER}}",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"users",
+								"{{ID_USER}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE USER",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json()\r",
+									"\r",
+									"pm.test(\"Status code 200\", function() {\r",
+									"\r",
+									"pm.response.to.have.status(200)\r",
+									"console.log(\"Id\"+ responseJson.id + \"updated.\")\r",
+									"\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "6792631904ecce1a15fe099ef89aa30c46921904f638b52ad8673cff62c6935d",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"aaaa@bb.com\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://gorest.co.in/public/v2/users/24243",
+							"protocol": "https",
+							"host": [
+								"gorest",
+								"co",
+								"in"
+							],
+							"path": [
+								"public",
+								"v2",
+								"users",
+								"24243"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ADD USER",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json()\r",
+									"\r",
+									"pm.test(\"Status code 201\", function(){\r",
+									"\r",
+									"   pm.response.to.have.status(201)\r",
+									"   console.log(\"201 response\") \r",
+									"\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Save ID\", function(){\r",
+									"\r",
+									"postman.setEnvironmentVariable(\"ID_USER\", responseJson.id)\r",
+									"console.log(responseJson.id)\r",
+									"\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"email\":\"harita_kaur1@lang-langworth.co\", \"name\":\"Hello\", \"gender\":\"male\", \"status\":\"inactive\" }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/users/",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"users",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
